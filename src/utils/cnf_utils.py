@@ -115,6 +115,53 @@ def kissat_solve(iclauses, no_vars, tmp_filename=None, args=None):
         
     return sat_status, asg, solvetime
 
+def kissat_solve_dec(kissat_path, iclauses, no_vars, tmp_filename=None, args=None):
+    if tmp_filename == None:
+        tmp_filename = './tmp/tmp_solve_{:}_{:}_{:}_{:}_{:}.cnf'.format(
+            datetime.now().hour, datetime.now().minute, datetime.now().second, len(iclauses), random.randint(0, 10000)
+        )
+    
+    save_cnf(iclauses, no_vars, tmp_filename)
+    if args != None:
+        cmd_solve = '{} {} -q {}'.format(kissat_path, args, tmp_filename)
+    else:
+        cmd_solve = '{} -q {}'.format(kissat_path, tmp_filename)
+        
+    solve_info, solvetime = utils.run_command(cmd_solve)
+    # Check satisfibility
+    is_sat = True
+    is_unknown = True
+    for line in solve_info:
+        if 'UNSATISFIABLE' in line:
+            is_unknown = False
+            is_sat = False
+            break
+        if 'SATISFIABLE' in line:
+            is_unknown = False
+    os.remove(tmp_filename)
+    
+    no_dec = -1
+    if not is_unknown:
+        for line in solve_info:
+            if 'DEC' in line:
+                no_dec = int(line.replace('\n', '').replace(' ', '').split(':')[-1])
+                break
+            
+    if is_sat and not is_unknown:
+        asg = parse_solution(solve_info, no_vars)
+        # asg = ['SAT']
+    else:
+        asg = []
+    # Sat Status: SAT=1, UNSAT=0, UNKNOWN=-1
+    if is_unknown:
+        sat_status = -1
+    elif is_sat:
+        sat_status = 1
+    else:
+        sat_status = 0
+        
+    return sat_status, asg, solvetime, no_dec
+
 def read_cnf(cnf_path):
     f = open(cnf_path, 'r')
     lines = f.readlines()

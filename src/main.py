@@ -18,7 +18,7 @@ if __name__ == '__main__':
     args = get_parse_args()
     config = RL_Config()
     print('==> Using settings {}'.format(args))
-    args.device = torch.device('cuda:0' if args.gpus[0] >= 0 else 'cpu')
+    args.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('Training in single device: ', args.device)
     
     # Create RL environments 
@@ -32,10 +32,10 @@ if __name__ == '__main__':
     # Train 
     eps = 0
     for train_times in range(args.train_times):
-        print('==> Training times: {}'.format(train_times))
         obs = rl_env.reset()
         done = False
         tot_reward = 0
+        print('==> Training: {:} / {:}, Problem: {}'.format(train_times, args.train_times, rl_env.problem_name))
         
         while not done:
             action = agent.act(obs, eps)

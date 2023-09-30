@@ -34,6 +34,7 @@ def get_parse_args():
     parser.add_argument('--mlp_layers', default=3, type=int)
     
     # Env
+    parser.add_argument('--kissat_path', default='./kissat/build/kissat', type=str)
     parser.add_argument('--customized_mapper', default='./mockturtle/build/examples/my_lutmap4sat', type=str)
     parser.add_argument('--baseline_mapper', default='./mockturtle/build/examples/my_baseline', type=str)
     parser.add_argument('--min_solve_time', default=10, type=int)
@@ -43,8 +44,6 @@ def get_parse_args():
     parser.add_argument('--disable_encode', action='store_true', default=False)
 
     # system
-    parser.add_argument('--gpus', default='-1', 
-                             help='-1 for CPU, use comma for multiple gpus')
     parser.add_argument("--local_rank", default=0, type=int)
     parser.add_argument('--num_workers', type=int, default=4,
                              help='dataloader threads. 0 for single-thread.')
@@ -222,9 +221,6 @@ def get_parse_args():
 
     args = parser.parse_args()
 
-    args.gpus_str = args.gpus
-    args.gpus = [int(gpu) for gpu in args.gpus.split(',')]
-    args.gpus = [i for i in range(len(args.gpus))] if args.gpus[0] >=0 else [-1]
     args.lr_step = [int(i) for i in args.lr_step.split(',')]
 
 
@@ -257,7 +253,6 @@ def get_parse_args():
 
     if args.debug > 0:
         args.num_workers = 0
-        args.gpus = [args.gpus[0]]
 
     if args.spc_exp_id != '':
         args.exp_id = args.spc_exp_id

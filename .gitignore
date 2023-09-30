@@ -7,3 +7,15 @@ src/mockturtle/build
 data
 exp
 tmp
+
+src/kissat/build
+*.o
+*.a
+makefile
+src/kissat/build.h
+src/kissat/kissat
+src/kissat/tissat
+*.gcno
+*.gcda
+*.gcov
+src/kissat/gmon.out
