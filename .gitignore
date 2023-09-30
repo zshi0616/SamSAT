@@ -1,0 +1,9 @@
+*inmemory*
+*__pycache__
+*.pyc
+.DS_Store
+
+src/mockturtle/build
+data
+exp
+tmp
