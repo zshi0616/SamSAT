@@ -16,7 +16,7 @@ class Trainer:
         
         self.optimizer = torch.optim.Adam(self.net.parameters(), lr=args.lr)
         # self.scheduler = StepLR(self.optimizer, step_size=args.lr_step, gamma=0.5)
-        self.loss = nn.MSELoss()
+        self.loss = nn.MSELoss().to(self.device)
         
     def step(self):
         s, a, r, s_next, nonterminal = self.buffer.sample(self.config.BATCH_SIZE)

@@ -13,10 +13,6 @@ from utils.lut_utils import parse_bench_cnf
 import utils.circuit_utils as circuit_utils
 from utils.aiger_utils import aig_to_xdata, xdata_to_cnf
 
-IGNORE_LIST = []
-# PROBLEM_LIST = ['a8', 'd28']
-PROBLEM_LIST = ["b27", "mult_op_DEMO1_11_11_TOP17", "aa31", "mult_op_DEMO1_12_12_TOP11", "ac21", "ad18", "h22", "d19", "aa23", "h17", "ad27", "ab19", "ac5", "h14", "aa18", "f2", "ad22", "mult_op_DEMO1_10_10_TOP13", "c1", "b31", "e21", "h2", "ac26", "ad28", "b29", "ad29", "mult_op_DEMO1_10_10_TOP12", "ac17", "f22", "ad5", "mult_op_DEMO1_13_13_TOP24", "d1", "h23", "ab24", "c8", "ab3", "f23", "ac4", "aa14", "aa3", "aa2", "aa24", "mult_op_DEMO1_10_10_TOP14", "d9", "ab26", "ac27", "e20", "mult_op_DEMO1_12_12_TOP21", "f1", "ad4", "ac16", "ab25", "e1", "h1", "ab14", "ab32", "c11", "h10", "d12", "h13", "ab11", "ac13", "e12", "mult_op_DEMO1_11_11_TOP18", "aa11", "aa25", "ad13", "b28", "f8", "ac28", "aa10", "e9", "d21", "aa28", "f9", "ad17", "h27", "mult_op_DEMO1_10_10_TOP11", "d24", "d23", "ac31", "e8", "f26", "f29", "e24", "d8", "d25", "h31", "b1", "h24", "ab29", "ab2", "e27", "h9", "c19", "f24", "f12", "c7", "c22", "ab10", "mult_op_DEMO1_10_10_TOP15", "ac12", "c16", "aa32", "ad32", "mult_op_DEMO1_12_12_TOP22", "c21", "h25", "ad12", "mult_op_DEMO1_13_13_TOP25", "e25", "d17", "mult_op_DEMO1_13_13_TOP10", "e22", "aa26", "ac35", "ab33", "c14", "ab27", "b8", "h28", "mult_op_DEMO1_11_11_TOP10", "f27", "c27", "e18", "mult_op_DEMO1_9_9_TOP12", "c23", "d29", "f19", "b11", "ac29", "mult_op_DEMO1_12_12_TOP10", "ac24", "ac32", "a9", "mult_op_DEMO1_10_10_TOP10", "ad36", "aa29", "ad33", "aa21", "a17", "b21", "ac22", "ab30", "h20", "b19", "mult_op_DEMO1_9_9_TOP11", "ad25", "mult_op_DEMO1_11_11_TOP19", "aa36"]
-
 def env_map_solve(args, aig_filename, tmp_dir):
     # Map to LUTs
     ckt_name = aig_filename.split('/')[-1].split('.')[0]
@@ -46,6 +42,11 @@ class solve_Env(gym.Env):
         self,
         args 
     ):
+        if args.debug:
+            PROBLEM_LIST = ['b5', 'f6']
+        else:
+            PROBLEM_LIST = ["b27", "mult_op_DEMO1_11_11_TOP17", "aa31", "mult_op_DEMO1_12_12_TOP11", "ac21", "ad18", "h22", "d19", "aa23", "h17", "ad27", "ab19", "ac5", "h14", "aa18", "f2", "ad22", "mult_op_DEMO1_10_10_TOP13", "c1", "b31", "e21", "h2", "ac26", "ad28", "b29", "ad29", "mult_op_DEMO1_10_10_TOP12", "ac17", "f22", "ad5", "mult_op_DEMO1_13_13_TOP24", "d1", "h23", "ab24", "c8", "ab3", "f23", "ac4", "aa14", "aa3", "aa2", "aa24", "mult_op_DEMO1_10_10_TOP14", "d9", "ab26", "ac27", "e20", "mult_op_DEMO1_12_12_TOP21", "f1", "ad4", "ac16", "ab25", "e1", "h1", "ab14", "ab32", "c11", "h10", "d12", "h13", "ab11", "ac13", "e12", "mult_op_DEMO1_11_11_TOP18", "aa11", "aa25", "ad13", "b28", "f8", "ac28", "aa10", "e9", "d21", "aa28", "f9", "ad17", "h27", "mult_op_DEMO1_10_10_TOP11", "d24", "d23", "ac31", "e8", "f26", "f29", "e24", "d8", "d25", "h31", "b1", "h24", "ab29", "ab2", "e27", "h9", "c19", "f24", "f12", "c7", "c22", "ab10", "mult_op_DEMO1_10_10_TOP15", "ac12", "c16", "aa32", "ad32", "mult_op_DEMO1_12_12_TOP22", "c21", "h25", "ad12", "mult_op_DEMO1_13_13_TOP25", "e25", "d17", "mult_op_DEMO1_13_13_TOP10", "e22", "aa26", "ac35", "ab33", "c14", "ab27", "b8", "h28", "mult_op_DEMO1_11_11_TOP10", "f27", "c27", "e18", "mult_op_DEMO1_9_9_TOP12", "c23", "d29", "f19", "b11", "ac29", "mult_op_DEMO1_12_12_TOP10", "ac24", "ac32", "a9", "mult_op_DEMO1_10_10_TOP10", "ad36", "aa29", "ad33", "aa21", "a17", "b21", "ac22", "ab30", "h20", "b19", "mult_op_DEMO1_9_9_TOP11", "ad25", "mult_op_DEMO1_11_11_TOP19", "aa36"]
+
         self.args = args
         self.problem_list = []
         self.step_ntk_filepath = self.args.step_ntk_filepath

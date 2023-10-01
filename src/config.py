@@ -7,12 +7,7 @@ def get_parse_args():
     # basic experiment setting
     parser.add_argument('--exp_id', default='default')
     parser.add_argument('--spc_exp_id', default='')
-    parser.add_argument('--debug', type=int, default=0,
-                             help='level of visualization.'
-                                  '1: only show the final results compared with C1'
-                                  '2: debug the network gradients')
-                                #   '3: use matplot to display' # useful when lunching training with ipython notebook
-                                #   '4: save all visualizations to disk')
+    parser.add_argument('--debug', default=False, action='store_true')
     parser.add_argument('--load_model', default='',
                              help='path to pretrained model')
     parser.add_argument('--resume', action='store_true',
@@ -192,8 +187,7 @@ def get_parse_args():
 
 
     # train and val
-    parser.add_argument('--lr', type=float, default=1e-4, 
-                             help='learning rate for batch size 32.')
+    parser.add_argument('--lr', type=float, default=1e-5)
     parser.add_argument('--weight_decay', type=float, default=1e-10, 
                              help='weight decay (default: 1e-10)')
     parser.add_argument('--lr_step', type=str, default='30,45',

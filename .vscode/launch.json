@@ -17,6 +17,7 @@
                 "--kissat_path", "./src/kissat/build/kissat",
                 "--min_solve_time", "0", 
                 "--max_solve_time", "100", 
+                "--debug"
             ]
         }
     ]
