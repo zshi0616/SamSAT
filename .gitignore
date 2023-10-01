@@ -3,10 +3,18 @@
 *.pyc
 .DS_Store
 
-src/mockturtle/build
 data
 exp
 tmp
+
+src/mockturtle/build
+src/mockturtle/build-*
+src/mockturtle/.vscode/
+src/mockturtle/**/*~
+src/mockturtle/**/.DS_Store
+src/mockturtle/docs/_build
+src/mockturtle/docs/doxyxml
+
 
 src/kissat/build
 *.o

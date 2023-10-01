@@ -48,7 +48,7 @@ if __name__ == '__main__':
             if buffer.ctr >= config.OBSERVE:
                 train_info = trainer.step()
                 print('==> Step: {:}, Loss: {:.4f}, Average Q: {:.4f}'.format(trainer.step_ctr, train_info['loss'], train_info['average_q']))
-                if trainer.step_ctr % args.save_epoch:
+                if trainer.step_ctr % args.save_epoch == 0:
                     net.save(os.path.join(args.save_dir, 'qnet.pth'))
                     print('==> Save model to {}'.format(os.path.join(args.save_dir, 'qnet.pth')))
     
