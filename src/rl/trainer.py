@@ -25,12 +25,14 @@ class Trainer:
         with torch.no_grad():
             target_qs = self.target(s_next)
             target_qs = torch.max(target_qs, dim=1).values
-            targets = r + nonterminal * self.config.GAMMA * target_qs
+            targets = r.to(self.device) + nonterminal.to(self.device) * self.config.GAMMA * target_qs.to(self.device)
+            targets = targets.to(self.device)
 
         # Q Net
         self.net.train()
         qs = self.net(s)
         qs = qs[torch.arange(len(a)), a]
+        qs = qs.to(self.device)
         
         # Train
         loss = self.loss(qs, targets)
