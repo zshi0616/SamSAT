@@ -17,7 +17,7 @@ def get_parse_args():
                                   'in the exp dir if load_model is empty.')
     parser.add_argument('--pretrained_path', default='../exp/pretrained/pretrain_l1/model_last.pth', type=str)
     parser.add_argument('--train_times', default=1000)
-    parser.add_argument('--save_epoch', default=100)
+    parser.add_argument('--save_epoch', default=20)
 
     # RL Q Net
     parser.add_argument('--RL_mode', default='train', choices=['test', 'train'])

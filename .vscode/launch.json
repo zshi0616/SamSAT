@@ -12,11 +12,9 @@
             "console": "integratedTerminal",
             "justMyCode": true, 
             "args": [
+                "--exp_id", "debug", 
                 "--Problem_AIG_Dir", "../dataset/LEC/all_case/", 
                 "--customized_mapper", "./src/mockturtle/build/examples/my_lutmap4sat", 
-                "--kissat_path", "./src/kissat/build/kissat",
-                "--min_solve_time", "0", 
-                "--max_solve_time", "100", 
                 "--debug"
             ]
         }

@@ -70,8 +70,9 @@ class solve_Env(gym.Env):
             
             # Baseline
             self.sat, map_time, solve_time, no_dec, nvars, nclas = env_map_solve(self.args, self.step_ntk_filepath, self.args.tmp_dir)
-            if self.sat != -1:
+            if self.sat != -1 and len(self.graph.POs) == 1:
                 break
+
         self.baseline_dec = no_dec
         self.baseline_nvars = nvars
         self.baseline_nclas = nclas
@@ -102,7 +103,6 @@ class solve_Env(gym.Env):
             _, action_runtime = run_command(action_cmd)
             self.action_time += action_runtime
             self.graph = self.parser.read_aiger(self.step_ntk_filepath)
-            
             reward = 0
             done = False
         

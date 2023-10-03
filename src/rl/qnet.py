@@ -24,21 +24,28 @@ class Q_Net(nn.Module):
     def forward_batch(self, obs):
         batch_size = len(obs)
 
-        # Merge 
-        x = torch.cat([obs[i].x for i in range(batch_size)], dim=0)
-        edge_index = torch.cat([obs[i].edge_index for i in range(batch_size)], dim=1)
-        forward_level = torch.cat([obs[i].forward_level for i in range(batch_size)], dim=0)
-        backward_level = torch.cat([obs[i].backward_level for i in range(batch_size)], dim=0)
-        forward_index = torch.cat([obs[i].forward_index for i in range(batch_size)], dim=0)
-        backward_index = torch.cat([obs[i].backward_index for i in range(batch_size)], dim=0)
-        gate = torch.cat([obs[i].gate for i in range(batch_size)], dim=0)
-        PIs = torch.cat([obs[i].PIs for i in range(batch_size)], dim=0)
-        POs = torch.cat([obs[i].POs for i in range(batch_size)], dim=0)
-        graph = dg.OrderedData(edge_index=edge_index, x=x, forward_level=forward_level, backward_level=backward_level, \
-            forward_index=forward_index, backward_index=backward_index)
-        graph.gate = gate
-        graph.PIs = PIs
-        graph.POs = POs
+        try:
+            # Merge 
+            x = torch.cat([obs[i].x for i in range(batch_size)], dim=0)
+            edge_index = torch.cat([obs[i].edge_index for i in range(batch_size)], dim=1)
+            forward_level = torch.cat([obs[i].forward_level for i in range(batch_size)], dim=0)
+            backward_level = torch.cat([obs[i].backward_level for i in range(batch_size)], dim=0)
+            forward_index = torch.cat([obs[i].forward_index for i in range(batch_size)], dim=0)
+            backward_index = torch.cat([obs[i].backward_index for i in range(batch_size)], dim=0)
+            gate = torch.cat([obs[i].gate for i in range(batch_size)], dim=0)
+            PIs = torch.cat([obs[i].PIs for i in range(batch_size)], dim=0)
+            POs = torch.cat([obs[i].POs for i in range(batch_size)], dim=0)
+            graph = dg.OrderedData(edge_index=edge_index, x=x, forward_level=forward_level, backward_level=backward_level, \
+                forward_index=forward_index, backward_index=backward_index)
+            graph.gate = gate
+            graph.PIs = PIs
+            graph.POs = POs
+        except:
+            print('Error in merging graphs')
+            print('Length of obs: {}'.format(len(obs)))
+            for item in obs:
+                print(item, len(item))
+            exit(0)
         
         # forward
         hs, hf = self.ckt_model(graph)
@@ -48,16 +55,14 @@ class Q_Net(nn.Module):
         return y_pred
         
     def forward(self, obs):
-        if len(obs) == 1:
-            return self.forward_one(obs[0])
-        else:
+        if isinstance(obs, list):
             return self.forward_batch(obs)
+        else:
+            return self.forward_one(obs)
         
     def save(self, path):
         torch.save(self.state_dict(), path)
         
     def load(self, path):
         self.load_state_dict(torch.load(path))
-        
-        
         
