@@ -16,7 +16,7 @@ def get_parse_args():
                                   'set load_model to model_last.pth '
                                   'in the exp dir if load_model is empty.')
     parser.add_argument('--pretrained_path', default='../exp/pretrained/pretrain_l1/model_last.pth', type=str)
-    parser.add_argument('--train_times', default=1000)
+    parser.add_argument('--train_times', default=10000, type=int)
     parser.add_argument('--save_epoch', default=20)
 
     # RL Q Net

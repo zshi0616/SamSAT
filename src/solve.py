@@ -15,7 +15,13 @@ from rl.trainer import Trainer
 from rl.buffer import ReplayBuffer
 from rl.env import solve_Env
 
-PROBLEM_LIST = ['ac3', 'ad14', 'ac1', 'ab18', 'h29']
+PROBLEM_LIST = [
+    # 'ac3', 'ad14', 'ac1', 'ab18', 'h29', 
+    # 'mult_op_DEMO1_11_11_TOP13', 'mult_op_DEMO1_11_11_TOP14', 
+    # 'mult_op_DEMO1_12_12_TOP17', 'mult_op_DEMO1_11_11_TOP12', 
+    # 'mult_op_DEMO1_12_12_TOP13'
+    'ab34'
+]
 
 if __name__ == '__main__':
     args = get_parse_args()
@@ -38,9 +44,11 @@ if __name__ == '__main__':
         done = False
         tot_reward = 0
         tot_q = 0
+        no_act = 0
         print('==> Testing: {:} / {:}, Problem: {}'.format(problem_idx, len(PROBLEM_LIST), rl_env.problem_name))
         while not done:
             action, q_val = agent.act(obs, 0, mode='test')
+            no_act += 1
             next_obs, reward, done, info = rl_env.step(action)
             tot_reward += reward
             tot_q += q_val
