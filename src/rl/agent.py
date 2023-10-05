@@ -15,9 +15,9 @@ class Agent:
             y_pred = self.net(hist_buffer)
             return y_pred
         
-    def act(self, hist_buffer, eps):
-        if eps < self.config.RANDOM_ACTION:
-            return np.random.randint(0, self.args.n_action)
+    def act(self, hist_buffer, eps, mode='train'):
+        if mode == 'train' and eps < self.config.RANDOM_ACTION:
+            return np.random.randint(0, self.args.n_action), 0
         else:
             y_pred = self.forward(hist_buffer)
-            return torch.argmax(y_pred).item()
+            return torch.argmax(y_pred).item(), torch.max(y_pred).item()

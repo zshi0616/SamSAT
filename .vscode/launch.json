@@ -12,10 +12,10 @@
             "console": "integratedTerminal",
             "justMyCode": true, 
             "args": [
-                "--exp_id", "debug", 
+                "--exp_id", "train", 
                 "--Problem_AIG_Dir", "../dataset/LEC/all_case/", 
                 "--customized_mapper", "./src/mockturtle/build/examples/my_lutmap4sat", 
-                "--debug"
+                "--kissat_path", "./src/kissat/build/kissat",
             ]
         }
     ]

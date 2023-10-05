@@ -22,6 +22,6 @@ class RL_Config(object):
             self.BATCH_SIZE = 16 # size of minibatch
             self.GAMMA = 0.98 # decay rate of past observations
             self.UPDATE_TIME = 50
-            self.RANDOM_ACTION = 70
+            self.RANDOM_ACTION = 0
 
 

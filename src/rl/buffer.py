@@ -46,4 +46,24 @@ class ReplayBuffer:
             batch_next_obs,
             (1.0 - self.dones[indexes]).to(self.device),
         )
+    
+    def save(self, save_path):
+        torch.save({
+            'ctr': self.ctr,
+            'full': self.full,
+            'size': self.size,
+            'dones': self.dones,
+            'rewards': self.rewards,
+            'actions': self.actions,
+            'observations': self.observations
+        }, save_path)
         
+    def load(self, load_path):
+        checkpoint = torch.load(load_path)
+        self.ctr = checkpoint['ctr']
+        self.full = checkpoint['full']
+        self.size = checkpoint['size']
+        self.dones = checkpoint['dones']
+        self.rewards = checkpoint['rewards']
+        self.actions = checkpoint['actions']
+        self.observations = checkpoint['observations']

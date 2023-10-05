@@ -24,14 +24,20 @@ if __name__ == '__main__':
     
     # Create RL environments 
     net = Q_Net(args)
+    buffer = ReplayBuffer(args, config)
     if args.resume:
         model_last_path = os.path.join(args.save_dir, 'qnet_last.pth')
         net.load(model_last_path)
         print('==> Load model from {}'.format(model_last_path))
+        buffer_last_path = os.path.join(args.save_dir, 'buffer.pth')
+        if os.path.exists(buffer_last_path):
+            buffer.load(buffer_last_path)
+            print('==> Load buffer from {}'.format(buffer_last_path))
+        else:
+            print('==> No buffer found, start from scratch')
     target_net = copy.deepcopy(net)
     rl_env = solve_Env(args=args)
     agent = Agent(net, args, config)
-    buffer = ReplayBuffer(args, config)
     trainer = Trainer(args, config, net, target_net, buffer)
     
     # Train 
@@ -43,7 +49,7 @@ if __name__ == '__main__':
         print('==> Training: {:} / {:}, Problem: {}'.format(train_times, args.train_times, rl_env.problem_name))
         
         while not done:
-            action = agent.act(obs, eps)
+            action, _ = agent.act(obs, eps)
             next_obs, reward, done, info = rl_env.step(action)
             eps += 1
             buffer.add_transition(obs, action, reward, done)
@@ -54,6 +60,9 @@ if __name__ == '__main__':
                 train_info = trainer.step()
                 print('==> Step: {:}, Loss: {:.4f}, Average Q: {:.4f}'.format(trainer.step_ctr, train_info['loss'], train_info['average_q']))
                 if trainer.step_ctr % args.save_epoch == 0:
+                    buffer_path = os.path.join(args.save_dir, 'buffer.pth')
+                    buffer.save(buffer_path)
+                    print('==> Save buffer to {}'.format(buffer_path))
                     model_last_path = os.path.join(args.save_dir, 'qnet_last.pth')
                     target_net.save(model_last_path)
                     model_path = os.path.join(args.save_dir, 'qnet_{:}.pth'.format(trainer.step_ctr))
