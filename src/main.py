@@ -64,7 +64,7 @@ if __name__ == '__main__':
                     buffer.save(buffer_path)
                     print('==> Save buffer to {}'.format(buffer_path))
                     model_last_path = os.path.join(args.save_dir, 'qnet_last.pth')
-                    target_net.save(model_last_path)
+                    net.save(model_last_path)
                     model_path = os.path.join(args.save_dir, 'qnet_{:}.pth'.format(trainer.step_ctr))
                     if os.path.exists(model_path):
                         os.remove(model_path)

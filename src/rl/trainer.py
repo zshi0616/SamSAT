@@ -44,6 +44,7 @@ class Trainer:
         # Update target net
         if self.step_ctr % self.config.UPDATE_TIME == 0:
             self.target.load_state_dict(self.net.state_dict())
+            print('==> Update target net')
         
         return {
             'loss': loss.item(), 

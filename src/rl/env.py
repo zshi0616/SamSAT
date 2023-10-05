@@ -90,8 +90,9 @@ class solve_Env(gym.Env):
             
             if status and self.sat != -1 and len(self.graph.POs) == 1:
                 break
-            elif self.mode != 'train':
-                raise "There is illegal instance in test mode!"
+            # elif self.mode != 'train':
+            #     print(self.origin_problem)
+            #     raise "There is illegal instance in test mode!"
 
         self.bl_dec = no_dec
         self.bl_nvars = nvars

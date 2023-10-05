@@ -19,9 +19,9 @@ class RL_Config(object):
             # RL model and training
             self.OBSERVE = 50 # timesteps to observe before training
             self.REPLAY_MEMORY = 500 # number of previous transitions to remember
-            self.BATCH_SIZE = 16 # size of minibatch
+            self.BATCH_SIZE = 8 # size of minibatch
             self.GAMMA = 0.98 # decay rate of past observations
-            self.UPDATE_TIME = 10
+            self.UPDATE_TIME = 20
             if args.resume:
                 self.RANDOM_ACTION = 0
             else:
