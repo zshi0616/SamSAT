@@ -15,7 +15,7 @@ from rl.trainer import Trainer
 from rl.buffer import ReplayBuffer
 from rl.env import solve_Env
 
-PROBLEM_LIST = ['b10', 'a8']
+PROBLEM_LIST = ['ac3', 'ad14', 'ac1', 'ab18', 'h29']
 
 if __name__ == '__main__':
     args = get_parse_args()
