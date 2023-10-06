@@ -16,11 +16,11 @@ from rl.buffer import ReplayBuffer
 from rl.env import solve_Env
 
 PROBLEM_LIST = [
-    # 'ac3', 'ad14', 'ac1', 'ab18', 'h29', 
-    # 'mult_op_DEMO1_11_11_TOP13', 'mult_op_DEMO1_11_11_TOP14', 
-    # 'mult_op_DEMO1_12_12_TOP17', 'mult_op_DEMO1_11_11_TOP12', 
-    # 'mult_op_DEMO1_12_12_TOP13'
-    'ab34'
+    # 'ac3', 'ab18', 'h29', 
+    'ad14', 'ac1', 
+    'mult_op_DEMO1_11_11_TOP13', 'mult_op_DEMO1_11_11_TOP14', 
+    'mult_op_DEMO1_12_12_TOP17', 'mult_op_DEMO1_11_11_TOP12', 
+    'mult_op_DEMO1_12_12_TOP13'
 ]
 
 if __name__ == '__main__':

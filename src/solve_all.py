@@ -19,10 +19,13 @@ from utils.logger import Logger
 from utils.aiger_utils import solve_aig
 
 PROBLEM_LIST = [
-    'ac3', 'ad14', 'ac1', 'ab18', 'h29', 
-    'mult_op_DEMO1_11_11_TOP13', 'mult_op_DEMO1_11_11_TOP14', 
-    'mult_op_DEMO1_12_12_TOP17', 'mult_op_DEMO1_11_11_TOP12', 
-    'mult_op_DEMO1_12_12_TOP13'
+    # 'ac3', 'ab18', 'h29', 
+    # 'ad14', 'ac1', 
+    # 'mult_op_DEMO1_11_11_TOP13', 'mult_op_DEMO1_11_11_TOP14', 
+    # 'mult_op_DEMO1_12_12_TOP17', 'mult_op_DEMO1_11_11_TOP12', 
+    # 'mult_op_DEMO1_12_12_TOP13'
+
+    'mchess16-mixed-25percent-blocked', 'mchess16-mixed-35percent-blocked', 'mchess16-mixed-45percent-blocked'
 ]
 
 if __name__ == '__main__':
