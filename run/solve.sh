@@ -1,5 +1,5 @@
-# DATASET=../../dataset/LEC/all_case_recoveraig/
-DATASET=../../dataset/LEC/all_case/
+DATASET=../../dataset/LEC/all_case_recoveraig/
+# DATASET=../../dataset/LEC/all_case/
 
 cd ./src
 
