@@ -33,7 +33,7 @@ struct lut_custom_cost
     //   return { 0u, 0u };
     // return { tt.num_vars(), 1u }; /* area, delay */
     float score = get_tt_score(tt);
-    return {score, score}; /* area, delay */
+    return {score, 1}; /* area, delay */
   }
 };
 

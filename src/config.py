@@ -30,7 +30,7 @@ def get_parse_args():
     
     # Env
     parser.add_argument('--kissat_path', default='./kissat/build/kissat', type=str)
-    parser.add_argument('--customized_mapper', default='./mockturtle/build/examples/my_lutmap4sat', type=str)
+    parser.add_argument('--customized_mapper', default='./mockturtle/build/examples/my_mapper', type=str)
     parser.add_argument('--baseline_mapper', default='./mockturtle/build/examples/my_baseline', type=str)
     parser.add_argument('--min_solve_time', default=10, type=int)
     parser.add_argument('--max_solve_time', default=100, type=int)
