@@ -115,11 +115,10 @@ def kissat_solve(iclauses, no_vars, tmp_filename=None, args=None):
         
     return sat_status, asg, solvetime
 
-def kissat_solve_dec(kissat_path, iclauses, no_vars, tmp_filename=None, args=None):
-    if tmp_filename == None:
-        tmp_filename = './tmp/tmp_solve_{:}_{:}_{:}_{:}_{:}.cnf'.format(
-            datetime.now().hour, datetime.now().minute, datetime.now().second, len(iclauses), random.randint(0, 10000)
-        )
+def kissat_solve_dec(kissat_path, iclauses, no_vars, tmp_dir, args=None):
+    tmp_filename = os.path.join(tmp_dir, 'tmp_solve_{:}_{:}_{:}_{:}_{:}.cnf'.format(
+        datetime.now().hour, datetime.now().minute, datetime.now().second, len(iclauses), random.randint(0, 10000)
+    ))
     
     save_cnf(iclauses, no_vars, tmp_filename)
     if args != None:

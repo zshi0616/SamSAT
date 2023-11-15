@@ -7,6 +7,7 @@ data
 exp
 tmp
 debug
+src_bak
 
 src/mockturtle/build
 src/mockturtle/build-*

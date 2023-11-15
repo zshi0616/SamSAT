@@ -17,16 +17,17 @@ def get_parse_args():
                                   'in the exp dir if load_model is empty.')
     parser.add_argument('--pretrained_path', default='../exp/pretrained/pretrain_l1/model_last.pth', type=str)
     parser.add_argument('--train_times', default=10000, type=int)
-    parser.add_argument('--save_epoch', default=20)
+    parser.add_argument('--save_epoch', default=100)
 
     # RL Q Net
     parser.add_argument('--RL_mode', default='train', choices=['test', 'train'])
-    parser.add_argument('--n_action', default=7, type=int)
-    parser.add_argument('--max_step', default=5, type=int)
+    parser.add_argument('--n_action', default=15, type=int)
+    parser.add_argument('--max_step', default=10, type=int)
     parser.add_argument('--ckt_dim', default=128, type=int)
     parser.add_argument('--cmd_dim', default=64, type=int)
     parser.add_argument('--mlp_dim', default=128, type=int)
-    parser.add_argument('--mlp_layers', default=3, type=int)
+    parser.add_argument('--mlp_layers', default=5, type=int)
+    parser.add_argument('--large_feature', default=False, action='store_true')
     
     # Env
     parser.add_argument('--kissat_path', default='./kissat/build/kissat', type=str)
@@ -37,6 +38,7 @@ def get_parse_args():
     
     # experiment 
     parser.add_argument('--disable_encode', action='store_true', default=False)
+    parser.add_argument('--disable_rl', action='store_true', default=False)
 
     # system
     parser.add_argument("--local_rank", default=0, type=int)

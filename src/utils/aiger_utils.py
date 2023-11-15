@@ -26,20 +26,27 @@ def solve_aig(aig_filename, tmp_dir, args=None):
     fanin_list, fanout_list = circuit_utils.get_fanin_fanout(x_data, edge_index)
     os.remove(tmp_aag_filename)
     
-    # Get Logic Level 
-    edge_index = torch.tensor(edge_index, dtype=torch.long)
-    edge_index = edge_index.t().contiguous()
-    forward_level = return_forward_order_info(edge_index, len(x_data))
-    forward_level = np.array(forward_level)
-    max_level = np.max(forward_level) + 1
-    level_list = []
-    for level in range(max_level):
-        level_list.append([])
+    # # Get Logic Level 
+    # edge_index = torch.tensor(edge_index, dtype=torch.long)
+    # edge_index = edge_index.t().contiguous()
+    # forward_level = return_forward_order_info(edge_index, len(x_data))
+    # forward_level = np.array(forward_level)
+    # max_level = np.max(forward_level) + 1
+    # level_list = []
+    # for level in range(max_level):
+    #     level_list.append([])
+    # for idx in range(len(x_data)):
+    #     level_list[forward_level[idx]].append(idx)
+    #     x_data[idx].append(forward_level[idx])
+    # assert len(level_list[-1]) == 1
+    # po_idx = level_list[-1][0]
+    no_fanout_list = []
     for idx in range(len(x_data)):
-        level_list[forward_level[idx]].append(idx)
-        x_data[idx].append(forward_level[idx])
-    assert len(level_list[-1]) == 1
-    po_idx = level_list[-1][0]
+        if len(fanout_list[idx]) == 0:
+            no_fanout_list.append(idx)
+    assert len(no_fanout_list) == 1
+    po_idx = no_fanout_list[0]
+    
     cnf = xdata_to_cnf(x_data, fanin_list, gate_to_index={'PI': 0, 'AND': 1, 'NOT': 2}, const_0=[], const_1=[po_idx])
     sat_res, asg, solvetime = kissat_solve(cnf, len(x_data), args=args)
     

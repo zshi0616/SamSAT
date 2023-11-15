@@ -38,6 +38,8 @@ class ReplayBuffer:
         for k in indexes:
             batch_obs.append(self.observations[k])
             batch_next_obs.append(self.observations[k + 1])
+        batch_obs = torch.stack(batch_obs).squeeze(1)
+        batch_next_obs = torch.stack(batch_next_obs).squeeze(1)
         
         return (
             batch_obs,

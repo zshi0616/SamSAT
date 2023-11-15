@@ -21,7 +21,7 @@ PROBLEM_LIST = [
     # 'mult_op_DEMO1_11_11_TOP13', 'mult_op_DEMO1_11_11_TOP14', 
     # 'mult_op_DEMO1_12_12_TOP17', 'mult_op_DEMO1_11_11_TOP12', 
     # 'mult_op_DEMO1_12_12_TOP13'
-    'ac31'
+    'mult_op_DEMO1_13_13_TOP11'
 ]
 
 if __name__ == '__main__':
@@ -49,6 +49,7 @@ if __name__ == '__main__':
         print('==> Testing: {:} / {:}, Problem: {}'.format(problem_idx, len(PROBLEM_LIST), rl_env.problem_name))
         while not done:
             action, q_val = agent.act(obs, 0, mode='test')
+            print('Action: {}, Q_Val: {:.4f}'.format(action, q_val))
             no_act += 1
             next_obs, reward, done, info = rl_env.step(action)
             tot_reward += reward

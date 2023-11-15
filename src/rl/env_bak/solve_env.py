@@ -33,7 +33,7 @@ def env_map_solve(args, mapper, aig_filename, tmp_dir):
         sat_res = -1 
         no_dec = 0
     else:
-        sat_res, asg, solvetime, no_dec = kissat_solve_dec(args.kissat_path, cnf, no_var, args='--time={:}'.format(int(args.max_solve_time - maplut_runtime)))
+        sat_res, asg, solvetime, no_dec = kissat_solve_dec(args.kissat_path, cnf, no_var, tmp_dir, args='--time={:}'.format(int(args.max_solve_time - maplut_runtime)))
     
     return sat_res, maplut_runtime, solvetime, no_dec, no_var, len(cnf)
 

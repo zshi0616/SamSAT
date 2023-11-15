@@ -12,10 +12,13 @@
             "console": "integratedTerminal",
             "justMyCode": true, 
             "args": [
-                "--exp_id", "solve", 
-                "--Problem_AIG_Dir", "../dataset/LEC/all_case/", 
-                "--customized_mapper", "./src/mockturtle/build/examples/my_lutmap4sat", 
+                "--exp_id", "debug", 
+                "--Problem_AIG_Dir", "../dataset/SAT_Comp/", 
+                "--customized_mapper", "./src/mockturtle/build/examples/my_mapper", 
+                "--baseline_mapper", "./src/mockturtle/build/examples/my_baseline", 
                 "--kissat_path", "./src/kissat/build/kissat",
+                "--large_feature", "--mlp_layers", "4", 
+                "--debug"
             ]
         }
     ]

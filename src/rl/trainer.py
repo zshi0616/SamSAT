@@ -17,6 +17,9 @@ class Trainer:
         self.optimizer = torch.optim.Adam(self.net.parameters(), lr=args.lr)
         # self.scheduler = StepLR(self.optimizer, step_size=args.lr_step, gamma=0.5)
         self.loss = nn.MSELoss().to(self.device)
+    
+    def update_target(self):
+        self.target.load_state_dict(self.net.state_dict())
         
     def step(self):
         s, a, r, s_next, nonterminal = self.buffer.sample(self.config.BATCH_SIZE)
@@ -41,10 +44,10 @@ class Trainer:
         self.optimizer.step()
         self.step_ctr += 1
         
-        # Update target net
-        if self.step_ctr % self.config.UPDATE_TIME == 0:
-            self.target.load_state_dict(self.net.state_dict())
-            print('==> Update target net')
+        # # Update target net
+        # if self.step_ctr % self.config.UPDATE_TIME == 0:
+        #     self.update_target()
+        #     print('==> Update target net')
         
         return {
             'loss': loss.item(), 
