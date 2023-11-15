@@ -9,4 +9,5 @@ python3 solve_exp.py \
  --baseline_mapper ./mockturtle/build/examples/my_baseline \
  --max_solve_time 1000 \
  --RL_mode test \
+ --no_baseline --no_sat07 \
  --resume

@@ -186,6 +186,7 @@ class solve_Env(gym.Env):
             self.md_dec = no_dec
             self.md_nvars = nvars
             self.md_nclas = nclas
+            self.sat_res = sat_res
             
         self.step_cnt += 1
         info = {}
@@ -203,6 +204,7 @@ class solve_Env(gym.Env):
             'md_dec': self.md_dec,
             'md_nvars': self.md_nvars,
             'md_nclas': self.md_nclas,
-            'md_mt': self.model_time
+            'md_mt': self.model_time, 
+            'res': self.sat_res
         }
         return res_dict
