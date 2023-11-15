@@ -35,6 +35,7 @@ def get_parse_args():
     parser.add_argument('--baseline_mapper', default='./mockturtle/build/examples/my_baseline', type=str)
     parser.add_argument('--min_solve_time', default=10, type=int)
     parser.add_argument('--max_solve_time', default=100, type=int)
+    parser.add_argument('--no_our', default=False, action='store_true')
     parser.add_argument('--no_baseline', default=False, action='store_true')
     parser.add_argument('--no_sat07', default=False, action='store_true')
     

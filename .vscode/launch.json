@@ -18,7 +18,10 @@
                 "--baseline_mapper", "./src/mockturtle/build/examples/my_baseline", 
                 "--kissat_path", "./src/kissat/build/kissat",
                 "--large_feature", "--mlp_layers", "4", 
-                "--debug"
+                "--debug", 
+                "--RL_mode", "test", 
+                "--no_our",  
+                "--resume"
             ]
         }
     ]

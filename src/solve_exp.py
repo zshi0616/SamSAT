@@ -21,7 +21,7 @@ from utils.aiger_utils import solve_aig
 from utils.utils import run_command
 
 PROBLEM_LIST = [
-    'ad44', 'ab38'
+    # 'ad44', 'ab38'
     # 'ac3', 'ad14', 'ac1', 'ab18', 'h29'
     # 'php17-mixed-35percent-blocked', 'sat05-2534', 'brent_9_0', 
     # 'CNF_to_alien_11', 'apx_2_DC-ST',
@@ -34,7 +34,7 @@ PROBLEM_LIST = [
     # 'php16-mixed-35percent-blocked', 'php17-mixed-15percent-blocked'
     # 'SE_apx_0', 
     # 'apx_2_DC-AD', 'apx_2_DS-ST', 
-    # '138_apx_2_DS-ST', 'apx_0', 'SE_apx_0', 
+    'SE_apx_0', '138_apx_2_DS-ST', 'apx_0'
 ]
 
 # Baseline: AIG --> CNF --> Solver

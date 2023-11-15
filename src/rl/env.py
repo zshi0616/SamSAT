@@ -150,13 +150,16 @@ class solve_Env(gym.Env):
         self.bl_st = solve_time
         self.bl_mp = map_time
 
-        start_time = time.time()
-        hs, hf = self.ckt_encoder(self.init_graph)
-        self.init_emb = torch.cat([hs[self.init_graph.POs], hf[self.init_graph.POs]], dim=1)
-        self.model_time = time.time() - start_time
+        if not self.args.no_our:
+            start_time = time.time()
+            hs, hf = self.ckt_encoder(self.init_graph)
+            self.init_emb = torch.cat([hs[self.init_graph.POs], hf[self.init_graph.POs]], dim=1)
+            self.model_time = time.time() - start_time
         self.no_instance += 1
                 
     def reset(self):
+        if self.args.no_our:
+            return None
         self.graph = self.init_graph
         self.step_cnt = 0
         self.action_time = 0
